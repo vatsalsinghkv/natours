@@ -1,0 +1,53 @@
+// Block
+.header {
+	height: 95vh;
+	background: linear-gradient(
+			to right bottom,
+			rgba($color-primary-light, $opacity-1),
+			rgba($color-primary-dark, $opacity-1)
+		),
+		url('../img/hero-small.jpg') fixed top;
+	background-size: cover;
+	position: relative;
+
+	// Density Switching (Using High Resolution 2000px img)
+	// , is like OR
+
+	@media only screen and (min-resolution: 192dpi) and (min-width: #{(600 / 16)}em),
+	only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: #{(600 / 16)}em), 
+	(min-width: #{(2000 / 16)}em) {
+		background: linear-gradient(
+				to right bottom,
+				rgba($color-primary-light, $opacity-1),
+				rgba($color-primary-dark, $opacity-1)
+			),
+			url('../img/hero.jpg') fixed top;
+	}
+
+	clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+	@include response(md) {
+		clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+	}
+
+	// NETSTING
+
+	// & -> Current Selector Path: .header
+	&__navbar {
+		padding: 3.5rem;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__logo {
+		height: 3.5rem;
+	}
+
+	// Headig Main
+	&__content {
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+	}
+}

@@ -1,0 +1,179 @@
+.navbar {
+	&__button {
+		@include circle(7rem);
+		@include boxShadow(1rem, 3rem, 0.1);
+		@include flexCenter;
+
+		border: none;
+		background-color: $color-white;
+		position: fixed;
+		top: 6rem;
+		right: 6rem;
+		z-index: 12;
+		cursor: pointer;
+
+		@include response(lg) {
+			top: 2.5rem;
+			right: 2.5rem;
+		}
+	}
+
+	&__background {
+		@include circle(6rem);
+		position: fixed;
+		top: 6.5rem;
+		right: 6.5rem;
+		background-image: radial-gradient(
+			$color-primary-light,
+			$color-primary-dark
+		);
+		z-index: 10;
+
+		transition: transform 0.75s cubic-bezier(0.83, 0, 0.17, 1);
+		// For custom timing functions like: ease-in and all
+		// transform: scale(80);
+
+		@include response(lg) {
+			top: 3rem;
+			right: 3rem;
+		}
+	}
+
+	// NAVBAR
+
+	&__nav {
+		@include flexCenter;
+		position: fixed;
+		height: 100vh;
+		width: 100%;
+		left: 0;
+		top: 0;
+
+		z-index: 11;
+		opacity: 0;
+		visibility: hidden;
+		width: 0;
+
+		transition: all 0.75s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+	}
+
+	&__list {
+		list-style: none;
+		text-align: center;
+	}
+
+	&__item {
+		margin: 1rem;
+	}
+
+	&__link {
+		&:link,
+		&:visited {
+			// To use transform
+			display: inline-block;
+			font-size: 3rem;
+			font-weight: 300;
+			text-decoration: none;
+			text-transform: uppercase;
+			color: $color-white;
+			padding: 1rem 1.5rem;
+
+			// Red occupy 50% completely (no gredient)
+			background-image: linear-gradient(
+				120deg,
+				transparent 50%,
+				$color-white 50%
+			);
+			background-size: 230%;
+
+			transition: all 0.4s;
+		}
+
+		&:hover,
+		&:active,
+		&:focus {
+			// bg size isn't changing
+			// background-position: x y:same;
+			// This specifies the X coordinate relative to the left edge, with the Y coordinate set to 50%.
+			// so X coord 100% means, rn 0% of bg is showing by setting 100%, 100% from left (0%) will be shown which is another color
+
+			// at left 100% of bg (size 200%) will be there
+			background-position: 100%; //start BG from 100% of its size
+			color: $color-primary;
+			transform: translateX(1rem);
+		}
+	}
+
+	// ICON
+
+	&__icon {
+		position: relative;
+
+		&,
+		&::after,
+		&::before {
+			display: inline-block;
+			width: 3rem;
+			height: 2px;
+			background-color: $color-grey-4;
+			transition: all 0.2s;
+		}
+
+		&::after,
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+		}
+
+		&::before {
+			top: -0.8rem;
+		}
+
+		&::after {
+			top: 0.8rem;
+		}
+	}
+
+	&__button:hover &__icon::before {
+		top: -1rem;
+	}
+
+	&__button:hover &__icon::after {
+		top: 1rem;
+	}
+
+	// FUNCTIONALITY
+
+	// When it's active
+	&.active {
+		.navbar {
+			// Displaying Navbar
+			&__background {
+				transform: scale(80);
+			}
+
+			&__nav {
+				opacity: 1;
+				visibility: visible;
+				width: 100%;
+			}
+
+			// Changing Icon
+			&__icon {
+				background-color: transparent;
+
+				&::before {
+					top: 0;
+					transform: rotate(135deg);
+					// 180 - 45 = 135deg
+				}
+
+				&::after {
+					top: 0;
+					transform: rotate(-135deg);
+				}
+			}
+		}
+	}
+}

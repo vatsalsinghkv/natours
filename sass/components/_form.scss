@@ -1,0 +1,110 @@
+.form {
+	&__group:not(:last-child) {
+		margin-bottom: 1.3rem;
+	}
+
+	&__label {
+		font-size: 1.2rem;
+		font-weight: 700;
+		margin-left: 2rem;
+		// Inline element doesn't have top and bottom margin
+		display: inline-block;
+		margin-top: 0.7rem;
+		transition: all 0.3s;
+	}
+
+	&__input {
+		font-size: 1.5rem;
+		color: inherit;
+		padding: 1.5rem 2rem;
+		border-radius: 2px;
+		border: none;
+
+		// Inline by default
+		display: block;
+		width: 90%;
+
+		@include response(md) {
+			width: 100%;
+		}
+
+		background-color: rgba($color-white, 0.5);
+		// So width wont change when element is focused
+		border-bottom: 3px solid transparent;
+		transition: all 0.3s;
+
+		&:focus {
+			outline: none;
+			@include boxShadow(1rem, 2rem, 0.1);
+			border-bottom: 3px solid $color-primary;
+		}
+
+		&:focus:invalid {
+			border-color: $color-secondary-dark;
+		}
+
+		// input::-webkit-input-placeholder
+		&::-webkit-input-placeholder {
+			color: $color-grey-3;
+		}
+	}
+
+	&__input:placeholder-shown + &__label {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-4rem);
+	}
+
+	// RADIO BUTTONS
+
+	&__group-inline {
+		display: flex;
+		justify-content: space-between;
+		width: 90%;
+
+		@include response(md) {
+			width: 100%;
+		}
+	}
+
+	&__radio-input {
+		display: none;
+	}
+
+	&__radio-label {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	&__radio-button {
+		display: inline-block;
+		@include circle(3rem);
+		margin-right: 0.5rem;
+
+		border: 5px solid $color-primary;
+
+		position: relative;
+
+		&::after {
+			content: '';
+			display: block;
+			position: absolute;
+			@include circle(1.3rem);
+
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+
+			background-color: $color-primary;
+			opacity: 0;
+			transition: opacity 0.2s;
+		}
+	}
+
+	// We need to use sibling operator without lebel it wont work as button is the child of label radio input has no child
+	&__radio-input:checked + &__radio-label &__radio-button::after {
+		opacity: 1;
+	}
+}

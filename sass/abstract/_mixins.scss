@@ -1,0 +1,107 @@
+// General
+@mixin flexCenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+// Never Uused
+@mixin focusStyle {
+	outline: none;
+	@include boxShadow(1rem, 2rem, 0.1);
+}
+
+// Text Style
+@mixin textGredient {
+	display: inline-block;
+	background-image: linear-gradient(
+		to right,
+		$color-primary-light,
+		$color-primary-dark
+	);
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+// Shape Style
+@mixin circle($r) {
+	height: $r;
+	width: $r;
+	border-radius: 50%;
+}
+
+// Box Styles
+@mixin boxShadow($shadowY, $shadowBlur, $opacity: 0.2) {
+	box-shadow: 0 $shadowY $shadowBlur rgba($color-black, $opacity);
+}
+
+@mixin btnShadow($shadowY, $shadowBlur, $translateY, $opacity: 0.2) {
+	@include boxShadow($shadowY, $shadowBlur, $opacity);
+	transform: translateY($translateY);
+}
+
+@mixin boxStyle {
+	border-radius: $box-radius;
+	@include boxShadow($box-shadow-Y, $box-shadow-blur, $box-shadow-opacity);
+}
+
+// MEDIA QUERY MANAGER
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1800] is where our normal styles apply
+1800px + :      Big desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+ORDER: Base + typography > general layout + grid > page layout > components
+
+1em = 16px
+*/
+
+// rems and ems are't depend on root font size they depend on browser font size (1rem = 16px), rems sometimes fail in media query in some browsers so we'll use em
+
+/* 
+1em = 16px
+1em / 16px = 1px
+Xem/16px = Xpx
+*/
+
+@mixin response($breakpoint) {
+	@if $breakpoint == 'xxl' {
+		// 1800px
+		@media only screen and (min-width: #{(1800 / 16)}em) {
+			// used () to know scss we are doing operation (only for divide)
+			@content;
+		}
+	}
+
+	@if $breakpoint == 'lg' {
+		@media only screen and (max-width: #{(1200 / 16)}em) {
+			@content;
+		}
+	}
+
+	@if $breakpoint == 'md' {
+		@media only screen and (max-width: #{(900 / 16)}em) {
+			@content;
+		}
+	}
+
+	@if $breakpoint == 'sm' {
+		@media only screen and (max-width: #{(600 / 16)}em) {
+			@content;
+		}
+	}
+
+	@if $breakpoint == 'xm' {
+		@media only screen and (max-width: #{(400 / 16)}em) {
+			@content;
+		}
+	}
+}

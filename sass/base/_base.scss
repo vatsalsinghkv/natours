@@ -1,0 +1,51 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+html {
+	// font-size: 10px;
+	// 100% = 16px (default)
+	// 100% / 16px = 1px
+	// (100% / 16px) * 10px = 10px (desired px)
+	// 6.25% * 10px = 10px
+	// 62.5% = 10px
+
+	// This defines what 1rem should be in %
+
+	// font-size: #{((100 / 16) * 10) * 1%};
+	font-size: #{(100 / 16) * 10%}; // 1rem = 10px
+
+	// > Big Screen
+	@include response(xxl) {
+		font-size: #{(100 / 16) * 12%}; // 1rem = 12px
+	}
+
+	// < Tab-Landscape
+	@include response(lg) {
+		font-size: #{(100 / 16) * 9%}; // 1rem = 9px
+	}
+
+	// < Tab
+	@include response(md) {
+		font-size: #{(100 / 16) * 8%}; // 1rem = 8px
+	}
+}
+
+body {
+	padding: 3rem;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+
+	@include response(lg) {
+		padding: 0;
+	}
+}
+
+::selection {
+	background-color: $color-primary;
+	color: $color-white;
+}

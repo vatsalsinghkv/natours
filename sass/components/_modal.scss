@@ -1,0 +1,127 @@
+/* MODAL */
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.25);
+
+	width: 75%;
+	@include response(sm) {
+		width: 90%;
+	}
+
+	background-color: $color-white;
+
+	@include boxShadow(2rem, 4rem, 0.2);
+	border-radius: 5px;
+
+	z-index: 100;
+	overflow: hidden;
+
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.4s;
+
+	&.visible {
+		transform: translate(-50%, -50%) scale(1);
+		transition: all 0.4s 0s;
+	}
+
+	&__overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		background-color: rgba($color-black, 0.8);
+		backdrop-filter: blur(3px);
+		z-index: 50;
+
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.4s;
+	}
+
+	// MODAL CLOSE
+	&__close {
+		background: none;
+		border: none;
+		display: inline-block;
+
+		position: absolute;
+		top: 2.5rem;
+		right: 2.5rem;
+
+		@include response(md) {
+			top: 1.75rem;
+			right: 1.75rem;
+		}
+
+		@include response(sm) {
+			top: 1rem;
+			right: 1rem;
+		}
+
+		cursor: pointer;
+
+		font-size: 4rem;
+		color: $color-grey-3;
+		transition: all 0.3s;
+
+		&:hover {
+			color: $color-primary-dark;
+		}
+	}
+
+	&__content {
+		display: flex;
+
+		&--left {
+			width: calc(100% / 3);
+			@include response(lg) {
+				display: none;
+			}
+		}
+
+		&--right {
+			align-self: center;
+			width: 66.66667%;
+			padding: 3rem 5rem;
+
+			@include response(lg) {
+				width: 100%;
+			}
+
+			@include response(sm) {
+				padding: 2rem 3.5rem;
+				text-align: center;
+			}
+		}
+	}
+
+	&__img {
+		display: block;
+		width: 100%;
+
+		&:last-child {
+			vertical-align: text-bottom;
+		}
+	}
+
+	&__text {
+		font-size: 1.4rem;
+		column-count: 2;
+		column-gap: 4rem;
+		column-rule: 1px solid $color-grey-2;
+		hyphens: auto;
+
+		@include response(sm) {
+			column-count: 1;
+		}
+	}
+}
+
+.visible {
+	opacity: 1;
+	visibility: visible;
+}

@@ -1,0 +1,90 @@
+.footer {
+	background-color: $color-grey-4;
+	padding: 10rem 0;
+	font-size: 1.4;
+	color: $color-grey-1;
+
+	.row {
+		@include response(lg) {
+			min-width: 72%;
+		}
+
+		@include response(sm) {
+			max-width: 100%;
+		}
+	}
+
+	@include response(lg) {
+		padding: 8rem 0;
+	}
+
+	&__logo-box {
+		text-align: center;
+		margin-bottom: 8rem;
+
+		@include response(lg) {
+			margin-bottom: 6rem;
+		}
+	}
+
+	&__logo {
+		width: 15rem;
+	}
+
+	&__navigation {
+		border-top: 1px solid $color-grey-3;
+		padding-top: 2rem;
+		width: 90%;
+		margin-right: auto;
+
+		@include response(lg) {
+			width: 100%;
+			text-align: center;
+			margin-right: 0;
+		}
+	}
+
+	&__list {
+		list-style: none;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__link {
+		&:visited,
+		&:link {
+			text-decoration: none;
+			text-transform: uppercase;
+			background-color: inherit;
+			color: inherit;
+			// color: $color-grey-1;
+
+			display: inline-block;
+			transition: all 0.2s;
+		}
+
+		&:hover,
+		&:active,
+		&:focus {
+			outline: none;
+			color: $color-primary;
+			background-color: $color-grey-4;
+			@include boxShadow(1rem, 4rem, 0.4);
+			// wasn't working bcoz a is inline
+			transform: rotate(10deg) scale(1.3);
+		}
+	}
+
+	&__copyright {
+		border-top: 1px solid $color-grey-3;
+		padding-top: 2rem;
+		width: 90%;
+		margin-left: auto;
+
+		@include response(lg) {
+			width: 100%;
+			margin-left: 0;
+			text-align: center;
+		}
+	}
+}
