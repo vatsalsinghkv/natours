@@ -39,6 +39,12 @@
 			margin-bottom: $gutter-y-sm;
 			width: 100% !important;
 		}
+
+		@include response(xm) {
+			margin-right: 0 !important;
+			margin-bottom: $gutter-y-xm;
+			width: 100% !important;
+		}
 	}
 
 	.col-1 {
